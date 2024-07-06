@@ -41,8 +41,11 @@ class TokenTests(TestCase):
 
     def test_token_expiration(self):
         app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 1  # 1 second for testing
-        access_token = create_access_token(identity=self.user.userId)
-        time.sleep(2)  # Sleep for 2 seconds to ensure token expiration
+        access_token = create_access_token(
+            identity=self.user.userId,
+            expires_delta=datetime.timedelta(seconds=2)
+            )
+        time.sleep(4)  # Sleep for 4 seconds to ensure token expiration
         with self.assertRaises(Exception):
             decode_token(access_token)
 
