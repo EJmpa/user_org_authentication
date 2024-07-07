@@ -1,10 +1,12 @@
 from flask import jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from app import db
+from extensions import db
 from models import User
-from . import user_bp
+from flask import Blueprint
 
-@user_bp.route('/<string:id>', methods=['GET'])
+users_bp = Blueprint('users', __name__)
+
+@users_bp.route('<string:user_id>', methods=['GET'])
 @jwt_required()
 def get_user(id):
     current_user_id = get_jwt_identity()
@@ -22,4 +24,8 @@ def get_user(id):
             }
         }), 200
     else:
-        return jsonify({"status": "Bad request", "message": "User not found", "statusCode": 404}), 404
+        return jsonify({
+            "status": "Bad request",
+            "message": "User not found",
+            "statusCode": 404
+            }), 404

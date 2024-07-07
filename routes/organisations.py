@@ -1,13 +1,15 @@
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from app import db
+from extensions import db
 from models import Organisation, User
-from . import org_bp
+from flask import Blueprint
 import uuid
 
-@org_bp.route('', methods=['GET'])
+organisations_bp = Blueprint('organisations', __name__)
+
+@organisations_bp.route('', methods=['GET'])
 @jwt_required()
-def get_organisations():
+def get_user_organisations():
     current_user_id = get_jwt_identity()
     user = User.query.filter_by(userId=current_user_id).first()
     if user:
@@ -21,13 +23,13 @@ def get_organisations():
     else:
         return jsonify({"status": "Bad request", "message": "User not found", "statusCode": 404}), 404
 
-@org_bp.route('/<string:org_id>', methods=['GET'])
+@organisations_bp.route('<string:org_id>', methods=['GET'])
 @jwt_required()
 def get_organisation(org_id):
     current_user_id = get_jwt_identity()
     user = User.query.filter_by(userId=current_user_id).first()
     org = Organisation.query.filter_by(orgId=org_id).first()
-    if org and user and user in org.users:
+    if (org and user) and (user in org.users):
         return jsonify({
             "status": "success",
             "message": "Organisation retrieved",
@@ -40,12 +42,10 @@ def get_organisation(org_id):
     else:
         return jsonify({"status": "Bad request", "message": "Organisation not found", "statusCode": 404}), 404
 
-@org_bp.route('', methods=['POST'])
+@organisations_bp.route('', methods=['POST'])
 @jwt_required()
 def create_organisation():
     data = request.get_json()
-    if not data or not data.get('name'):
-        return jsonify({"status": "Bad request", "message": "Invalid data", "statusCode": 400}), 400
 
     current_user_id = get_jwt_identity()
     user = User.query.filter_by(userId=current_user_id).first()
@@ -69,9 +69,12 @@ def create_organisation():
             }
         }), 201
     else:
-        return jsonify({"status": "Bad request", "message": "User not found", "statusCode": 404}), 404
+        return jsonify({
+            "status": "Bad request",
+            "message": "Client error",
+            "statusCode": 400}), 400
 
-@org_bp.route('/<string:org_id>/users', methods=['POST'])
+@organisations_bp.route('<string:org_id>/users', methods=['POST'])
 @jwt_required()
 def add_user_to_organisation(org_id):
     data = request.get_json()
@@ -84,6 +87,13 @@ def add_user_to_organisation(org_id):
     if org and user:
         org.users.append(user)
         db.session.commit()
-        return jsonify({"status": "success", "message": "User added to organisation successfully"}), 200
+        return jsonify({
+            "status": "success",
+            "message": "User added to organisation successfully"
+            }), 200
     else:
-        return jsonify({"status": "Bad request", "message": "User or organisation not found", "statusCode": 404}), 404
+        return jsonify({
+            "status": "Bad request",
+            "message": "User or organisation not found",
+            "statusCode": 404
+            }), 404

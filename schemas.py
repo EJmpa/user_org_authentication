@@ -1,5 +1,5 @@
 from app import ma
-from marshmallow import Schema, fields, validate
+from marshmallow import Schema, fields, validate, ValidationError
 
 class UserSchema(ma.Schema):
     userId = fields.String(required=True, validate=validate.Length(min=1))

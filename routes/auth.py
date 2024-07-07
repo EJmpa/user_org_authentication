@@ -1,12 +1,16 @@
 from flask import request, jsonify
 from flask_jwt_extended import create_access_token
-from app import db
+from extensions import db
+from flask import Blueprint
 from models import User, Organisation
-from schemas import user_schema
+from schemas import user_schema, organisation_schema
 from utils.helpers import hash_password, check_password
 from marshmallow import ValidationError
-from . import auth_bp
 import uuid
+import datetime
+
+auth_bp = Blueprint('auth', __name__)
+
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
@@ -24,7 +28,7 @@ def register():
         hashed_password = hash_password(data['password'])
 
         new_user = User(
-            userId=data['userId'],
+            userId=str(uuid.uuid4()),
             firstName=data['firstName'],
             lastName=data['lastName'],
             email=data['email'],
@@ -47,7 +51,9 @@ def register():
         db.session.add(new_org)
         db.session.commit()
 
-        access_token = create_access_token(identity=new_user.userId)
+        access_token = create_access_token(
+            identity=new_user.userId, expires_delta=datetime.timedelta(hours=1)
+            )
         return jsonify({
             "status": "success",
             "message": "Registration successful",
@@ -64,17 +70,25 @@ def register():
         }), 201
 
     except Exception as e:
-        return jsonify({"status": "Bad request", "message": "Registration unsuccessful", "statusCode": 400}), 400
+        return jsonify({
+            "status": "Bad request",
+            "message": "Registration unsuccessful",
+            "statusCode": 400
+            }), 400
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    if not data:
-        return jsonify({"status": "Bad request", "message": "Invalid data", "statusCode": 400}), 400
 
     user = User.query.filter_by(email=data['email']).first()
+   
+   
+    
     if user and check_password(user.password, data['password']):
-        access_token = create_access_token(identity=user.userId)
+        access_token = create_access_token(
+            identity=user.userId,
+            expires_delta=datetime.timedelta(hours=1)
+            )
         return jsonify({
             "status": "success",
             "message": "Login successful",
@@ -90,4 +104,8 @@ def login():
             }
         }), 200
     else:
-        return jsonify({"status": "Bad request", "message": "Authentication failed", "statusCode": 401}), 401
+        return jsonify({
+            "status": "Bad request",
+            "message": "Authentication failed",
+            "statusCode": 401
+            }), 401

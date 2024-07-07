@@ -4,5 +4,8 @@ psycopg2-binary
 werkzeug
 python-dotenv
 marshmallow
+flask-marshmallow
 marshmallow-sqlalchemy
 flask-jwt-extended
+flask_bcrypt
+Flask-Migrate
