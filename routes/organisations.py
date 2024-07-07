@@ -2,6 +2,7 @@ from flask import request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from extensions import db
 from models import Organisation, User
+from schemas import user_schema, organisation_schema
 from flask import Blueprint
 import uuid
 
