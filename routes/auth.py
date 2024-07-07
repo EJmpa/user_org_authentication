@@ -21,9 +21,11 @@ def register():
     except ValidationError as err:
         return jsonify({"errors": err.messages}), 422
     
-    if User.query.filter_by(email=user_data['email']).first() is not None:
-        return jsonify({"errors": [{"field": "email", "message": "Email already registered"}]}), 422
     
+    existing_user = User.query.filter_by(email=user_data['email']).first()
+    if existing_user:
+        return jsonify({"errors": [{"field": "email", "message": "Email already registered"}]}), 422
+
     try:
         hashed_password = hash_password(data['password'])
 
