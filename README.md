@@ -35,8 +35,12 @@ This repository contains a Flask API that provides user organisation authenticat
 
 3. Create a new database and update the `config.py` file with the database credentials.
 
-4. Run the migrations: ```bash flask db upgrade
+4. Run the migrations:
+    ```bash
+    flask db upgrade
 
-5. Start the API: ```bash python3 app.py
+5. Start the API:
+    ```bash
+    python3 app.py
 
 6. Use a tool like Postman or cURL to test the API endpoints.
