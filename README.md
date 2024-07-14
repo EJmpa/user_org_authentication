@@ -28,3 +28,15 @@ This repository contains a Flask API that provides user organisation authenticat
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/user_org_authentication.git
+
+2. Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+
+3. Create a new database and update the `config.py` file with the database credentials.
+
+4. Run the migrations: ```bash flask db upgrade
+
+5. Start the API: ```bash python3 app.py
+
+6. Use a tool like Postman or cURL to test the API endpoints.
