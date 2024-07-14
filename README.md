@@ -48,17 +48,19 @@ This repository contains a Flask API that provides user organisation authenticat
 
 ## API Endpoints
 #### Authentication
-POST /auth/register: Register a new user
-POST /auth/login: Login a user and obtain a JWT token
-Users
-GET /api/users: Get a list of all users
-GET /api/users/:id: Get a user by ID
-POST /api/users: Create a new user
-PUT /api/users/:id: Update a user
-DELETE /api/users/:id: Delete a user
-Organisations
-GET /api/organisations: Get a list of all organisations
-GET /api/organisations/:id: Get an organisation by ID
+* POST /auth/register: Register a new user
+* POST /auth/login: Login a user and obtain a JWT token
+
+### Users
+* GET /api/users: Get a list of all users
+* GET /api/users/:id: Get a user by ID
+* POST /api/users: Create a new user
+* PUT /api/users/:id: Update a user
+* DELETE /api/users/:id: Delete a user
+
+#### Organisations
+* GET /api/organisations: Get a list of all organisations
+* GET /api/organisations/:id: Get an organisation by ID
 POST /api/organisations: Create a new organisation
 PUT /api/organisations/:id: Update an organisation
 DELETE /api/organisations/:id: Delete an organisation
