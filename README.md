@@ -81,7 +81,7 @@ chukwuemekajc@gmail.com
 0.1: Initial Release
 
 ## Acknowledgments
-HNG (Organisation orgabising the internship)
+HNG (Organisation orgabising the internship)\
 Flask\
 Flask-JWT-Extended\
 Flask-Migrate\
