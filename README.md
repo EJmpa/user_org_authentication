@@ -47,38 +47,41 @@ This repository contains a Flask API that provides user organisation authenticat
 
 
 ## API Endpoints
-#### Authentication
+### Authentication
 * POST /auth/register: Register a new user
 * POST /auth/login: Login a user and obtain a JWT token
 
 ### Users
 * GET /api/users: Get a list of all users
 * GET /api/users/:id: Get a user by ID
-* POST /api/users: Create a new user
-* PUT /api/users/:id: Update a user
-* DELETE /api/users/:id: Delete a user
+* PUT /api/users/:id: Update a user (Yet to be implemented)
+* DELETE /api/users/:id: Delete a user (Yet to be implemented)
 
-#### Organisations
+### Organisations
 * GET /api/organisations: Get a list of all organisations
 * GET /api/organisations/:id: Get an organisation by ID
-POST /api/organisations: Create a new organisation
-PUT /api/organisations/:id: Update an organisation
-DELETE /api/organisations/:id: Delete an organisation
-License
+* POST /api/organisations: Create a new organisation
+* PUT /api/organisations/:id: Update an organisation
+* DELETE /api/organisations/:id: Delete an organisation
+
+##License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Contributing
+##Contributing
 Contributions are welcome! If you’d like to contribute to this project, please fork the repository and submit a pull request.
 
-Support
+## Support
 If you encounter any issues or have any questions, please open an issue on the repository.
 
-Authors
-Your Name
-Your Email
-Version History
+##Authors
+Chukwuemeka Jude Chukwu
+chukwuemekajc@gmail.com
+
+##Version History
 0.1: Initial Release
-Acknowledgments
+
+## Acknowledgments
+HNG (Organisation orgabising the internship)
 Flask
 Flask-JWT-Extended
 Flask-Migrate
