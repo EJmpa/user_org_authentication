@@ -54,15 +54,15 @@ This repository contains a Flask API that provides user organisation authenticat
 ### Users
 * GET /api/users: Get a list of all users
 * GET /api/users/:id: Get a user by ID
-* PUT /api/users/:id: Update a user (Yet to be implemented)
-* DELETE /api/users/:id: Delete a user (Yet to be implemented)
+* PUT /api/users/:id: Update a user `(Yet to be implemented)`
+* DELETE /api/users/:id: Delete a user `(Yet to be implemented)`
 
 ### Organisations
 * GET /api/organisations: Get a list of all organisations
 * GET /api/organisations/:id: Get an organisation by ID
 * POST /api/organisations: Create a new organisation
-* PUT /api/organisations/:id: Update an organisation (Yet to be implemented)
-* DELETE /api/organisations/:id: Delete an organisation (Yet to be implemented)
+* PUT /api/organisations/:id: Update an organisation `(Yet to be implemented)`
+* DELETE /api/organisations/:id: Delete an organisation `(Yet to be implemented)`
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
@@ -74,7 +74,7 @@ Contributions are welcome! If you’d like to contribute to this project, please
 If you encounter any issues or have any questions, please open an issue on the repository.
 
 ## Authors
-Chukwuemeka Jude Chukwu\n
+Chukwuemeka Jude Chukwu\
 chukwuemekajc@gmail.com
 
 ## Version History
@@ -85,5 +85,5 @@ HNG (Organisation orgabising the internship)
 Flask\
 Flask-JWT-Extended\
 Flask-Migrate\
-Flask-Marshmallow\n
+Flask-Marshmallow\
 Bcrypt
